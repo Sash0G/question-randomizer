@@ -26,22 +26,27 @@ for k in range(int(p)):
     formatted_data = ""
     questions = []
     answers = []
-    for i in range(4):
+    for i in range(5):
         file_path = "set"+str(i+1)+".xlsx"
         # print(file_path)
         set = read_excel_file(file_path)
         # print(set)
         random.shuffle(set)
-        for j in range(20):
-            try: questions.append(set[j][0])
-            except: break
-            answers.append(set[j][1])
+        if i<4: 
+            for j in range(20):
+                try: questions.append(set[j][0])
+                except: break
+                answers.append(set[j][1])
+        else:
+            for j in range(1):
+                try: questions.append(set[j][0])
+                except: break
 
     for num,item in enumerate(questions):
         doc.add_paragraph(str(num+1)+". "+item)
 
     table = doc.add_table(rows=1, cols=2)
-    table.style = 'Table Grid'  # Example table with 1 row and 3 columns
+    table.style = 'Table Grid'
     for j,row_data in enumerate(answers):
         row_cells = table.rows[-1].cells
         row_cells[0].text = str(j+1)
